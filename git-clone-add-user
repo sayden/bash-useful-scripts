@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Passing a repo, a git username and a git email it clones the repo and sets the
+# git config local to the given username and email. This is useful to force the
+# user that makes commits in the machine
+
+# Usage git-clone-add-user [repo] [user] [email]
+
+if [ "$#" -ne 3 ]; then
+  echo "Illegal number of parameters. Usage:"
+  echo "git-clone-add-user [repo] [user] [email]"
+else
+  git clone $1 && cd $(basename $1 .git)
+  git config --local --add user.name $2
+  git config --local --add user.email $3
+fi
